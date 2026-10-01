@@ -1,0 +1,197 @@
+/* Загальні налаштування */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #222;
+    background-color: #ffffff;
+    line-height: 1.5;
+}
+
+/* Верхній червонавий банер */
+.top-bar {
+    background-color: #b82525;
+    color: #ffffff;
+    text-align: center;
+    padding: 6px 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Шапка та навігація */
+.main-header {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15px 40px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.top-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: #111;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.top-nav a.active, .top-nav a:hover {
+    color: #b82525;
+}
+
+/* Контейнер сторінки */
+.site-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 40px;
+}
+
+/* Заголовок сторінки */
+.page-title-block {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-title {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.breadcrumbs {
+    font-size: 13px;
+    color: #777;
+}
+
+/* Двоколонкова структура */
+.content-wrapper {
+    display: flex;
+    gap: 40px;
+}
+
+/* Бічне меню (Sidebar) */
+.sidebar {
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.sidebar h2 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 6px;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #222;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sidebar-menu a:hover {
+    color: #b82525;
+}
+
+.sidebar-menu .active-category > a {
+    color: #b82525;
+}
+
+.sub-menu {
+    list-style: none;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+.sub-menu li {
+    margin-bottom: 4px;
+}
+
+.sub-menu a {
+    font-weight: 400;
+    text-transform: none;
+    color: #555;
+}
+
+/* Сітка каталогу карток */
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.poster-card {
+    background-color: #f7f7f7;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.image-wrapper {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.poster-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.poster-details {
+    font-size: 12px;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Підвал */
+.main-footer {
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #666;
+}

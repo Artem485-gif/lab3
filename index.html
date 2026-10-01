@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фільми та серіали</title>
+
+    <style>
+        /* Загальні налаштування */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #222;
+            background-color: #ffffff;
+            line-height: 1.5;
+        }
+
+        /* Верхній червоний банер */
+        .top-bar {
+            background-color: #5c0000;
+            color: #ffffff;
+            text-align: center;
+            padding: 6px 15px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Шапка та навігація */
+        .main-header {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 15px 40px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .header-info {
+            margin-top: 4px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .top-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: #111;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .top-nav a.active,
+        .top-nav a:hover {
+            color: #b82525;
+        }
+
+        /* Контейнер сторінки */
+        .site-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        /* Заголовок сторінки */
+        .page-title-block {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .main-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .breadcrumbs {
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* Двоколонкова структура */
+        .content-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        /* Бічне меню */
+        .sidebar {
+            width: 220px;
+            flex-shrink: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 6px;
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: #222;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu a:hover {
+            color: #b82525;
+        }
+
+        .sidebar-menu .active-category > a {
+            color: #b82525;
+        }
+
+        .sub-menu {
+            list-style: none;
+            padding-left: 10px;
+            margin-top: 5px;
+        }
+
+        .sub-menu li {
+            margin-bottom: 4px;
+        }
+
+        .sub-menu a {
+            font-weight: 400;
+            text-transform: none;
+            color: #555;
+        }
+
+        /* Основна частина каталогу */
+        .catalog-section {
+            flex-grow: 1;
+        }
+
+        .catalog-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        /* Сітка карток */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* Картка фільму */
+        .movie-card {
+            background-color: #f7f7f7;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .movie-card header {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .movie-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        /* Зображення */
+        .movie-card figure {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .image-wrapper {
+            width: 100%;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .movie-card figcaption {
+            font-size: 11px;
+            color: #777;
+            margin-top: 7px;
+        }
+
+        /* Інформація про фільм */
+        .movie-card p {
+            width: 100%;
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 7px;
+        }
+
+        .movie-card data,
+        .movie-card time {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .movie-card strong {
+            color: #b82525;
+            font-weight: 700;
+        }
+
+        /* Статус */
+        .movie-status {
+            border-top: 1px solid #e5e5e5;
+            padding-top: 8px;
+            margin-top: 5px;
+        }
+
+        /* Блок "Про каталог" */
+        .about-section {
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .about-section h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .about-section p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Підвал */
+        .main-footer {
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 1000px) {
+            .catalog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .main-header {
+                padding: 15px 20px;
+            }
+
+            .site-container {
+                padding: 20px;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .catalog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .movie-card img {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Верхній банер -->
+    <div class="top-bar">
+        Каталог фільмів та серіалів
+    </div>
+
+    <!-- Шапка -->
+    <header class="main-header" id="header">
+        <div class="header-container">
+
+            <div>
+                <div class="logo">FILM CATALOG</div>
+                <p class="header-info">Каталог улюблених фільмів та серіалів</p>
+            </div>
+
+            <nav class="top-nav" id="navigation" aria-label="Головна навігація">
+                <ul>
+                    <li>
+                        <a href="#catalog" class="active">Каталог</a>
+                    </li>
+                    <li>
+                        <a href="#about">Про каталог</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main id="main">
+
+        <div class="site-container">
+
+            <!-- Заголовок -->
+            <section class="page-title-block">
+                <h1 class="main-title">Фільми та серіали</h1>
+                <p class="breadcrumbs">
+                </p>
+            </section>
+
+            <div class="content-wrapper">
+
+                <!-- Бічне меню -->
+                <aside class="sidebar" id="filters">
+
+                    <h2>---ФІЛЬТРИ---</h2>
+
+                    <ul class="sidebar-menu">
+
+                        <li class="active-category">
+                            <a href="#catalog">Усі фільми</a>
+                        </li>
+
+                        <li>
+                            <a href="#movie-1">Фантастика</a>
+                        </li>
+
+                        <li>
+                            <a href="#movie-2">Трилер</a>
+                        </li>
+
+                        <li>
+                            <a href="#movie-3">Драма</a>
+                        </li>
+
+                        <li>
+                            <a href="#movie-5">Бойовик</a>
+                        </li>
+
+                        <li>
+                            <a href="#movie-6">Комедія</a>
+                        </li>
+
+                    </ul>
+
+                </aside>
+
+
+                <!-- Каталог -->
+                <section class="catalog-section" id="catalog">
+
+                    <h2 class="catalog-title">
+                        Каталог фільмів та серіалів
+                    </h2>
+
+                    <div class="catalog-grid">
+
+
+                        <!-- Фільм 1 -->
+                        <article class="movie-card" id="movie-1">
+
+                            <header>
+                                <h3>Аватар 2: Шлях води</h3>
+                            </header>
+
+                            <figure>
+                                <img
+                                   <img src="images/1.jpg"
+                                   srcset="images/1.jpg 600w"
+                                   sizes="(max-width: 600px) 100vw, 600px"
+                                   alt="Постер фільму Аватар"
+                                   title="Аватар 2: Шлях води"
+                                   loading="lazy">
+
+                                <figcaption>
+                                    Постер фільму "Аватар 2: Шлях води"
+                                </figcaption>
+                            </figure>
+
+                            <p>
+                                Жанр:
+                                <data value="фантастика">Фантастика</data>
+                            </p>
+
+                            <p>
+                                Рік:
+                                <time datetime="2022">2022</time>
+                            </p>
+
+                            <p>
+                                Тривалість:
+                                <data value="192">192 хвилини</data>
+                            </p>
+
+                            <p>
+                                Короткий сюжет: Продовження видовищної науково-фантастичної епопеї Джеймса Кемерона. Землянин Джейк Саллі шукає своє місце серед інопланетного народу На'ві, який постраждав від людей. Йому належить захищати свій новий дім та сім'ю від ворожого вторгнення, адже до прекрасної планети Пандора знову наближається загроза Землі...
+                            </p>
+
+                            <p class="movie-status">
+                                Статус:
+                                <strong>Переглянуто</strong>
+                            </p>
+
+                        </article>
+
+
+                        <!-- Фільм 2 -->
+                        <article class="movie-card" id="movie-2">
+
+                            <header>
+                                <h3>Мис страху</h3>
+                            </header>
+
+                            <figure>
+                                <img
+                                   <img src="images/2.jpg"
+                                   srcset="images/2.jpg 600w"
+                                   sizes="(max-width: 600px) 100vw, 600px"
+                                   alt="Постер фільму Мис страху"
+                                   title="Мис страху"
+                                   loading="lazy">
+
+                                <figcaption>
+                                    Постер фільму "Мис страху"
+                                </figcaption>
+                            </figure>
+
+                            <p>
+                                Жанр:
+                                <data value="трилер">Трилер</data>
+                            </p>
+
+                            <p>
+                                Рік:
+                                <time datetime="2026">2026</time>
+                            </p>
+
+                            <p>
+                                Тривалість:
+                                <data value="148">1 сезон 10 серій</data>
+                            </p>
+
+                            <p>
+                                Короткий сюжет: Щасливе подружжя стикається зі зростаючою загрозою, коли Макс Кейді, сумнозвісний злочинець з їхнього минулого, виходить із в'язниці. Рухомий жагою помсти, він починає методично руйнувати їхнє життя, перетворюючи кожну мить на кошмар. Колись спокійне існування пари перетворюється на боротьбу за виживання, де кожен крок Кейді є продуманою частиною його жорстокого плану. Напруга зростає, а психологічний тиск стає нестерпним, змушуючи подружжя протистояти не лише зовнішній небезпеці, а й власним страхам та минулим помилкам. Серіал досліджує теми помсти, виживання та крихкості людських стосунків під впливом екстремальних обставин.
+                            </p>
+
+                            <p class="movie-status">
+                                Статус:
+                                <strong>Переглянуто</strong>
+                            </p>
+
+                        </article>
+
+
+                        <!-- Фільм 3 -->
+                        <article class="movie-card" id="movie-3">
+
+                            <header>
+                                <h3>Таємниця бункера</h3>
+                            </header>
+
+                            <figure>
+                                <img
+                                    <img src="images/3.jpg"
+                                    srcset="images/3.jpg 600w"
+                                    sizes="(max-width: 600px) 100vw, 600px"
+                                    alt="Постер фільму Таємниця бункера"
+                                    title="Таємниця бункера"
+                                    loading="lazy"
+                                >
+
+                                <figcaption>
+                                    Постер фільму "Таємниця бункера"
+                                </figcaption>
+                            </figure>
+
+                            <p>
+                                Жанр:
+                                <data value="драма">Драма</data>
+                            </p>
+
+                            <p>
+                                Рік:
+                                <time datetime="2022">2022</time>
+                            </p>
+
+                            <p>
+                                Тривалість:
+                                <data value="59">59 хвилин</data>
+                            </p>
+
+                            <p>
+                                У постапокаліптичному світі, де поверхня Землі стала токсичною та непридатною для життя, тисячі людей знайшли притулок у гігантському підземному бункері. Мешканці живуть за суворими правилами та вірять, що ці норми захищають їх від зовнішнього, зруйнованого світу. Проте, коли таємничі смерті та незрозумілі події починають підривати їхню віру, деякі жителі починають ставити під сумнів усе, що їм відомо про їхнє існування. Вони прагнуть розкрити правду про бункер, його походження та справжній стан зовнішнього світу, ризикуючи власним життям заради знань, які можуть змінити їхнє майбутнє назавжди.
+                            </p>
+
+                            <p class="movie-status">
+                                Статус:
+                                <strong>Переглянуто</strong>
+                            </p>
+
+                        </article>
+
+
+                        <!-- Фільм 4 -->
+                        <article class="movie-card" id="movie-4">
+
+                            <header>
+                                <h3>Матриця</h3>
+                            </header>
+
+                            <figure>
+                                <img
+                                    <img src="images/4.jpg"
+                                    srcset="images/4.jpg 600w"
+                                    sizes="(max-width: 600px) 100vw, 600px"
+                                    alt="Постер фільму Матриця"
+                                    title="Матриця"
+                                    loading="lazy"
+                                >
+
+                                <figcaption>
+                                    Постер фільму «Матриця»
+                                </figcaption>
+                            </figure>
+
+                            <p>
+                                Жанр:
+                                <data value="фантастика">Фантастика</data>
+                            </p>
+
+                            <p>
+                                Рік:
+                                <time datetime="1999">1999</time>
+                            </p>
+
+                            <p>
+                                Тривалість:
+                                <data value="136">136 хвилин</data>
+                            </p>
+
+                            <p>
+                                Короткий сюжет: Фантастичний фільм «Матриця» є першою частиною трилогії, в центрі якої виявляється молодий хлопець. Томас Андерсон живе в звичному для нього світі, де днем ​​він співробітник великої фірми, а вночі відомий хакер Нео. Головний герой навіть не підозрює, що весь звичний світ, в якому живуть мільярди людей це матриця, але саме йому судилося зіграти вирішальну роль в прихованій боротьбі. Після збігу обставин, у нього відбудеться зустріч з Морфіусом, який є одним з лідерів в боротьбі між машинами і людьми. Саме він розповідає Нео правду про звичний світі, якого в реальності не існує. Нео належить зробити складний вибір: приєднатися до боротьби і дізнатися всю правду або повернутися до колишнього життя...
+                            </p>
+
+                            <p class="movie-status">
+                                Статус:
+                                <strong>Переглянуто</strong>
+                            </p>
+
+                        </article>
+
+
+                        <!-- Фільм 5 -->
+                        <article class="movie-card" id="movie-5">
+
+                            <header>
+                                <h3>Гладіатор</h3>
+                            </header>
+
+                            <figure>
+                                <img
+                                    s<img src="images/5.jpg"
+                                    srcset="images/5.jpg 600w"
+                                    sizes="(max-width: 600px) 100vw, 600px"
+                                    alt="Постер фільму Гладіатор"
+                                    title="Гладіатор"
+                                    loading="lazy"
+                                >
+
+                                <figcaption>
+                                    Постер фільму «Гладіатор»
+                                </figcaption>
+                            </figure>
+
+                            <p>
+                                Жанр:
+                                <data value="бойовик">Бойовик</data>
+                            </p>
+
+                            <p>
+                                Рік:
+                                <time datetime="2000">2000</time>
+                            </p>
+
+                            <p>
+                                Тривалість:
+                                <data value="155">155 хвилин</data>
+                            </p>
+
+                            <p>
+                                Події історичного фільму «Гладіатор» розгортаються навколо римського генерала Максимуса. Він благородна людина і величний воїн, який керує цілими легіонами. Максимус приносить Риму нову перемогу над варварами і мимоволі опиняється в центрі палацових змов. Він з честю боровся за велику імперію, але був звинувачений у зраді і засуджений до смертної кари. В результаті зради, генерал стає втікачем і незабаром потрапляє в полон.
+Найвеличнішому воїнові спіткає доля гладіатора, про якого незабаром дізнається вся імперія. Максимус здобув одну перемогу за іншою і серед народу отримує визнання і популярність. Він стає величним і непереможним воїном на арені, за яким готові піти його вірні воїни. Для імператора Максимус стає великою загрозою, з тисячами шанувальників. Однак попереду гладіатора очікує найголовніша битва, від якої буде залежати доля всієї імперії.
+                            </p>
+
+                            <p class="movie-status">
+                                Статус:
+                                <strong>Не переглянуто</strong>
+                            </p>
+
+                        </article>
+
+
+                        <!-- Фільм 6 -->
+                        <article class="movie-card" id="movie-6">
+
+                            <header>
+                                <h3>Білі не вміють стрибати</h3>
+                            </header>
+
+                            <figure>
+                                <img
+                                    <img src="images/6.jpg"
+                                    srcset="images/6.jpg 600w"
+                                    sizes="(max-width: 600px) 100vw, 600px"
+                                    alt="Постер фільму Білі не вміють стрибати"
+                                    title="Білі не вміють стрибати"
+                                    loading="lazy"
+                                >
+
+                                <figcaption>
+                                    Постер фільму "Білі не вміють стрибати"
+                                </figcaption>
+                            </figure>
+
+                            <p>
+                                Жанр:
+                                <data value="комедія">Комедія</data>
+                            </p>
+
+                            <p>
+                                Рік:
+                                <time datetime="1992">1992</time>
+                            </p>
+
+                            <p>
+                                Тривалість:
+                                <data value="116">116 хвилин</data>
+                            </p>
+
+                            <p>
+                                Підприємливий Біллі живе у Лос-Анджелесі та любить баскетбол. А ще він любить просту наживу, а оскільки всі чорні хлопці в окрузі переконані, що білі не вміють грати в баскетбол, він зробив зі своєї гри успішну фінансову схему. Він приймає ставки на своє ім'я і майже завжди виграє. Так продовжується якийсь час, і Біллі не згадує про борги. Але якось за ним приходять кредитори. Та й біда, як то кажуть, не приходить одна. В окрузі з'являється класний чорношкірий спортсмен на ім'я Сідней, який готовий дати фору грі Біллі. До того ж, Сідней так само не проти підзаробити на своїй першокласній грі, як і хитрун Біллі. Між хлопцями зав'язується неабияке протистояння на баскетбольному майданчику, і кожен гне свою лінію. До того моменту, поки одному з них не спадає на думку, що разом можна зірвати набагато більший куш...
+                            </p>
+
+                            <p class="movie-status">
+                                Статус:
+                                <strong>Не переглянуто</strong>
+                            </p>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <aside class="about-section" id="about">
+
+                <h2>Про каталог</h2>
+
+                <p>
+                    Необхідно створити персоналізовану вебсторінку з використанням семантичної розмітки HTML5. Сторінка має містити інформацію про автора (студента), бути логічно структурованою, доступною для користувача та відповідати сучасним стандартам веброзробки.
+                </p>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <footer class="main-footer" id="footer">
+
+        <p>Автор: Ткаченко А. В.</p>
+
+        <p>Група: ІН-41/1</p>
+
+        <p>
+            &copy;
+            <time datetime="2026">2026</time>
+            Каталог «Фільми та серіали»
+        </p>
+
+    </footer>
+
+</body>
+</html>
