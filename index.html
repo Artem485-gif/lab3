@@ -1,322 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Фільми та серіали</title>
-
-    <style>
-        /* Загальні налаштування */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: #222;
-            background-color: #ffffff;
-            line-height: 1.5;
-        }
-
-        /* Верхній червоний банер */
-        .top-bar {
-            background-color: #5c0000;
-            color: #ffffff;
-            text-align: center;
-            padding: 6px 15px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        /* Шапка та навігація */
-        .main-header {
-            border-bottom: 1px solid #e5e5e5;
-            padding: 15px 40px;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
-
-        .header-info {
-            margin-top: 4px;
-            color: #777;
-            font-size: 13px;
-        }
-
-        .top-nav ul {
-            display: flex;
-            list-style: none;
-            gap: 15px;
-        }
-
-        .top-nav a {
-            text-decoration: none;
-            color: #111;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .top-nav a.active,
-        .top-nav a:hover {
-            color: #b82525;
-        }
-
-        /* Контейнер сторінки */
-        .site-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 40px;
-        }
-
-        /* Заголовок сторінки */
-        .page-title-block {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .main-title {
-            font-size: 26px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .breadcrumbs {
-            font-size: 13px;
-            color: #777;
-        }
-
-        /* Двоколонкова структура */
-        .content-wrapper {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-        }
-
-        /* Бічне меню */
-        .sidebar {
-            width: 220px;
-            flex-shrink: 0;
-        }
-
-        .sidebar h2 {
-            font-size: 14px;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: 6px;
-        }
-
-        .sidebar-menu a {
-            text-decoration: none;
-            color: #222;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .sidebar-menu a:hover {
-            color: #b82525;
-        }
-
-        .sidebar-menu .active-category > a {
-            color: #b82525;
-        }
-
-        .sub-menu {
-            list-style: none;
-            padding-left: 10px;
-            margin-top: 5px;
-        }
-
-        .sub-menu li {
-            margin-bottom: 4px;
-        }
-
-        .sub-menu a {
-            font-weight: 400;
-            text-transform: none;
-            color: #555;
-        }
-
-        /* Основна частина каталогу */
-        .catalog-section {
-            flex-grow: 1;
-        }
-
-        .catalog-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        /* Сітка карток */
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        /* Картка фільму */
-        .movie-card {
-            background-color: #f7f7f7;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .movie-card header {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .movie-card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #222;
-        }
-
-        /* Зображення */
-        .movie-card figure {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .image-wrapper {
-            width: 100%;
-        }
-
-        .movie-card img {
-            width: 100%;
-            height: 360px;
-            object-fit: cover;
-            display: block;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .movie-card figcaption {
-            font-size: 11px;
-            color: #777;
-            margin-top: 7px;
-        }
-
-        /* Інформація про фільм */
-        .movie-card p {
-            width: 100%;
-            font-size: 12px;
-            color: #555;
-            margin-bottom: 7px;
-        }
-
-        .movie-card data,
-        .movie-card time {
-            color: #333;
-            font-weight: 600;
-        }
-
-        .movie-card strong {
-            color: #b82525;
-            font-weight: 700;
-        }
-
-        /* Статус */
-        .movie-status {
-            border-top: 1px solid #e5e5e5;
-            padding-top: 8px;
-            margin-top: 5px;
-        }
-
-        /* Блок "Про каталог" */
-        .about-section {
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid #e5e5e5;
-        }
-
-        .about-section h2 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .about-section p {
-            font-size: 13px;
-            color: #666;
-        }
-
-        /* Підвал */
-        .main-footer {
-            border-top: 1px solid #e5e5e5;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 13px;
-            color: #666;
-        }
-
-        /* Адаптивність */
-        @media (max-width: 1000px) {
-            .catalog-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .header-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .main-header {
-                padding: 15px 20px;
-            }
-
-            .site-container {
-                padding: 20px;
-            }
-
-            .content-wrapper {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-            }
-
-            .catalog-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .top-nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .movie-card img {
-                height: auto;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -335,16 +23,12 @@
                 <p class="header-info">Каталог улюблених фільмів та серіалів</p>
             </div>
 
-            <nav class="top-nav" id="navigation" aria-label="Головна навігація">
-                <ul>
-                    <li>
-                        <a href="#catalog" class="active">Каталог</a>
-                    </li>
-                    <li>
-                        <a href="#about">Про каталог</a>
-                    </li>
-                </ul>
-            </nav>
+            <nav class="top-nav" aria-label="Основна навігація">
+    <ul>
+        <li><a href="index.html" class="active" aria-current="page">Головна</a></li>
+        <li><a href="about.html">Про проєкт</a></li>
+    </ul>
+</nav>
 
         </div>
     </header>
@@ -413,12 +97,11 @@
                         <article class="movie-card" id="movie-1">
 
                             <header>
-                                <h3>Аватар 2: Шлях води</h3>
+                                <h3><a href="details.html?id=movie-1">Аватар 2: Шлях води</a></h3>
                             </header>
 
                             <figure>
-                                <img
-                                   <img src="images/1.jpg"
+                                <img src="images/1.jpg"
                                    srcset="images/1.jpg 600w"
                                    sizes="(max-width: 600px) 100vw, 600px"
                                    alt="Постер фільму Аватар"
@@ -461,12 +144,11 @@
                         <article class="movie-card" id="movie-2">
 
                             <header>
-                                <h3>Мис страху</h3>
+                                <h3><a href="details.html?id=movie-2">Мис страху</a></h3>
                             </header>
 
                             <figure>
-                                <img
-                                   <img src="images/2.jpg"
+                                <img src="images/2.jpg"
                                    srcset="images/2.jpg 600w"
                                    sizes="(max-width: 600px) 100vw, 600px"
                                    alt="Постер фільму Мис страху"
@@ -509,12 +191,11 @@
                         <article class="movie-card" id="movie-3">
 
                             <header>
-                                <h3>Таємниця бункера</h3>
+                                <h3><a href="details.html?id=movie-3">Таємниця бункера</a></h3>
                             </header>
 
                             <figure>
-                                <img
-                                    <img src="images/3.jpg"
+                                <img src="images/3.jpg"
                                     srcset="images/3.jpg 600w"
                                     sizes="(max-width: 600px) 100vw, 600px"
                                     alt="Постер фільму Таємниця бункера"
@@ -558,12 +239,11 @@
                         <article class="movie-card" id="movie-4">
 
                             <header>
-                                <h3>Матриця</h3>
+                                <h3><a href="details.html?id=movie-4">Матриця</a></h3>
                             </header>
 
                             <figure>
-                                <img
-                                    <img src="images/4.jpg"
+                                <img src="images/4.jpg"
                                     srcset="images/4.jpg 600w"
                                     sizes="(max-width: 600px) 100vw, 600px"
                                     alt="Постер фільму Матриця"
@@ -607,7 +287,7 @@
                         <article class="movie-card" id="movie-5">
 
                             <header>
-                                <h3>Гладіатор</h3>
+                                <h3><a href="details.html?id=movie-5">Гладіатор</a></h3>
                             </header>
 
                             <figure>
@@ -657,12 +337,11 @@
                         <article class="movie-card" id="movie-6">
 
                             <header>
-                                <h3>Білі не вміють стрибати</h3>
+                                <h3><a href="details.html?id=movie-6">Білі не вміють стрибати</a></h3>
                             </header>
 
                             <figure>
-                                <img
-                                    <img src="images/6.jpg"
+                                <img src="images/6.jpg"
                                     srcset="images/6.jpg 600w"
                                     sizes="(max-width: 600px) 100vw, 600px"
                                     alt="Постер фільму Білі не вміють стрибати"
@@ -737,3 +416,8 @@
 
 </body>
 </html>
+
+
+
+
+

@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Детальна інформація про фільми та серіали каталогу FILM CATALOG.">
+    <title>Деталі фільму | FILM CATALOG</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="top-bar">КАТАЛОГ ФІЛЬМІВ ТА СЕРІАЛІВ</div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <p class="logo">FILM CATALOG</p>
+            <nav class="top-nav" aria-label="Основна навігація">
+                <ul>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="details.html" class="active" aria-current="page">Деталі фільму</a></li>
+                    <li><a href="about.html">Про проєкт</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-container">
+        <section class="page-title-block">
+            <h1 class="main-title" id="movie-title">Назва фільму</h1>
+            <nav class="breadcrumbs" aria-label="Навігаційний ланцюжок">
+                <a href="index.html">Головна</a> / <span id="breadcrumb-title">Деталі фільму</span>
+            </nav>
+        </section>
+
+        <article>
+            <header id="intro">
+                <p id="movie-intro">Детальна інформація про вибраний фільм або серіал.</p>
+            </header>
+
+            <nav aria-label="Навігація сторінкою">
+                <h2>Зміст сторінки</h2>
+                <ul>
+                    <li><a href="#poster">Постер</a></li>
+                    <li><a href="#description">Опис</a></li>
+                    <li><a href="#information">Характеристики</a></li>
+                    <li><a href="#versions">Додаткова інформація</a></li>
+                </ul>
+            </nav>
+
+            <section id="poster">
+                <h2>Постер</h2>
+                <figure>
+                    <picture>
+                        <source id="poster-png" srcset="images/1.png" type="image/png">
+                        <img id="movie-poster" src="images/1.jpg" alt="Постер фільму" width="300" height="450" fetchpriority="high">
+                    </picture>
+                    <figcaption id="poster-caption">Постер фільму з каталогу</figcaption>
+                </figure>
+            </section>
+
+            <section id="description">
+                <h2>Опис фільму</h2>
+                <p id="description-one"></p>
+                <p id="description-two"></p>
+                <p><strong>Жанр:</strong> <span id="movie-genre"></span>.</p>
+            </section>
+
+            <section id="information">
+                <h2>Основні характеристики</h2>
+                <dl>
+                    <dt>Назва</dt>
+                    <dd id="info-title"></dd>
+                    <dt>Жанр</dt>
+                    <dd id="info-genre"></dd>
+                    <dt>Рік виходу</dt>
+                    <dd id="info-year"></dd>
+                    <dt>Тривалість</dt>
+                    <dd id="info-duration"></dd>
+                    <dt>Тип</dt>
+                    <dd id="info-type"></dd>
+                </dl>
+            </section>
+
+            <section id="versions">
+                <h2>Додаткова інформація</h2>
+                <table>
+                    <caption>Характеристики вибраного фільму або серіалу</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Параметр</th>
+                            <th scope="col">Значення</th>
+                            <th scope="col">Опис</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movie-table">
+                    </tbody>
+                </table>
+            </section>
+        </article>
+
+        <p><a href="index.html">Повернутися до каталогу</a></p>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2026 FILM CATALOG. Каталог фільмів та серіалів.</p>
+    </footer>
+
+    <script>
+        const movies = {
+            "movie-1": {
+                title: "Аватар 2: Шлях води",
+                image: "images/1.jpg",
+                png: "images/1.png",
+                genre: "Фантастика",
+                year: "2022",
+                duration: "192 хвилини",
+                type: "Фільм",
+                intro: "Продовження видовищної науково-фантастичної епопеї Джеймса Кемерона.",
+                description1: "Землянин Джейк Саллі шукає своє місце серед інопланетного народу На'ві, який постраждав від людей.",
+                description2: "Йому належить захищати свій новий дім та сім'ю від ворожого вторгнення, адже до прекрасної планети Пандора знову наближається загроза Землі.",
+                extra: "Продовження історії, дія якої відбувається на планеті Пандора."
+            },
+            "movie-2": {
+                title: "Мис страху",
+                image: "images/2.jpg",
+                png: "images/2.png",
+                genre: "Трилер",
+                year: "2026",
+                duration: "1 сезон 10 серій",
+                type: "Серіал",
+                intro: "Психологічний трилер про подружжя, минуле якого повертається у вигляді небезпечної загрози.",
+                description1: "Щасливе подружжя стикається зі зростаючою загрозою, коли Макс Кейді, сумнозвісний злочинець з їхнього минулого, виходить із в'язниці.",
+                description2: "Рухомий жагою помсти, він починає методично руйнувати їхнє життя. Напруга зростає, змушуючи подружжя протистояти власним страхам та минулим помилкам.",
+                extra: "Сюжет досліджує теми помсти, виживання та людських стосунків."
+            },
+            "movie-3": {
+                title: "Таємниця бункера",
+                image: "images/3.jpg",
+                png: "images/3.png",
+                genre: "Драма",
+                year: "2022",
+                duration: "59 хвилин",
+                type: "Фільм",
+                intro: "Драматична історія, представлена в каталозі.",
+                description1: "Події розгортаються навколо загадкового бункера, який приховує важливі таємниці.",
+                description2: "Героям доводиться поступово розкривати обставини подій та приймати непрості рішення.",
+                extra: "Жанрова категорія — драма."
+            },
+            "movie-4": {
+                title: "Матриця",
+                image: "images/4.jpg",
+                png: "images/4.png",
+                genre: "Фантастика",
+                year: "1999",
+                duration: "136 хвилин",
+                type: "Фільм",
+                intro: "Науково-фантастичний фільм про реальність, технології та людську свідомість.",
+                description1: "Програміст Томас Андерсон веде подвійне життя, а згодом дізнається, що звичний світ не є таким, яким здається.",
+                description2: "Перед ним постає вибір: залишитися в ілюзії або дізнатися правду про світ, у якому він живе.",
+                extra: "Фільм порушує питання природи реальності та свободи вибору."
+            },
+            "movie-5": {
+                title: "Гладіатор",
+                image: "images/5.jpg",
+                png: "images/5.png",
+                genre: "Бойовик",
+                year: "2000",
+                duration: "155 хвилин",
+                type: "Фільм",
+                intro: "Історичний фільм про боротьбу, честь і прагнення до справедливості.",
+                description1: "Римський полководець Максимус після зради втрачає своє становище та свободу.",
+                description2: "Ставши гладіатором, він прагне відновити справедливість і помститися за зруйноване життя.",
+                extra: "У центрі сюжету — боротьба головного героя за честь і справедливість."
+            },
+            "movie-6": {
+                title: "Білі не вміють стрибати",
+                image: "images/6.jpg",
+                png: "images/6.png",
+                genre: "Комедія",
+                year: "1992",
+                duration: "116 хвилин",
+                type: "Фільм",
+                intro: "Спортивна комедія, присвячена баскетболу та взаєминам людей.",
+                description1: "Історія розповідає про гравців у вуличний баскетбол, які об'єднуються заради спільної мети.",
+                description2: "Герої використовують свої спортивні навички, почуття гумору та хитрість, щоб досягти успіху.",
+                extra: "Фільм поєднує спортивні змагання, комедійні ситуації та історію партнерства."
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const movieId = params.get("id") || "movie-1";
+        const movie = movies[movieId] || movies["movie-1"];
+
+        document.title = movie.title + " — детальна інформація | FILM CATALOG";
+        document.querySelector('meta[name="description"]').content = "Детальна інформація про " + movie.title + ": опис, жанр, рік виходу та тривалість.";
+        document.getElementById("movie-title").textContent = movie.title;
+        document.getElementById("breadcrumb-title").textContent = movie.title;
+        document.getElementById("movie-intro").textContent = movie.intro;
+        document.getElementById("movie-poster").src = movie.image;
+        document.getElementById("movie-poster").alt = "Постер: " + movie.title;
+        document.getElementById("poster-png").srcset = movie.png;
+        document.getElementById("poster-caption").textContent = "Постер: " + movie.title;
+        document.getElementById("description-one").textContent = movie.description1;
+        document.getElementById("description-two").textContent = movie.description2;
+        document.getElementById("movie-genre").textContent = movie.genre;
+
+        document.getElementById("info-title").textContent = movie.title;
+        document.getElementById("info-genre").textContent = movie.genre;
+        document.getElementById("info-year").textContent = movie.year;
+        document.getElementById("info-duration").textContent = movie.duration;
+        document.getElementById("info-type").textContent = movie.type;
+
+        const rows = [
+            ["Назва", movie.title, "Назва вибраного матеріалу"],
+            ["Жанр", movie.genre, "Жанрова категорія"],
+            ["Рік виходу", movie.year, "Рік прем'єри"],
+            ["Тривалість", movie.duration, "Тривалість перегляду"],
+            ["Тип", movie.type, "Формат матеріалу"],
+            ["Додатково", movie.extra, "Коротка характеристика"]
+        ];
+
+        const tableBody = document.getElementById("movie-table");
+
+        rows.forEach(function(row) {
+            const tr = document.createElement("tr");
+
+            row.forEach(function(value) {
+                const td = document.createElement("td");
+                td.textContent = value;
+                tr.appendChild(td);
+            });
+
+            tableBody.appendChild(tr);
+        });
+    </script>
+</body>
+</html>
